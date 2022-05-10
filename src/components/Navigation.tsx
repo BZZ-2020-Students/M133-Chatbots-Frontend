@@ -21,17 +21,22 @@ export default function Navigation() {
         })
             .then(r => {
                 if (r.status === 200) {
-                    return r.json();
+                    return {user: r.json(), loggedIn: true};
                 } else if (r.status === 201) {
-                    return {
+                    return {user: {
                         username: "undefined",
                         id: -1,
                         loggedIn: false,
-                    } as userInfos;
+                    } as userInfos, loggedIn: false};
                 }
             })
             .then(r => {
-                setUser(r);
+                console.log(r);
+                setUser({
+                    id: r.user.id,
+                    username: r.user.username,
+                    loggedIn: r.loggedIn,
+                });
             });
     }, []);
 
