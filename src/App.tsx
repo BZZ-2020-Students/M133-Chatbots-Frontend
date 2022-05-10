@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {HashRouter} from "react-router-dom";
+import Navigation from "./components/Navigation";
 
 function App() {
     const [serverMessage, setServerMessage] = React.useState('');
@@ -15,12 +16,12 @@ function App() {
     });
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
+        <HashRouter>
+            <div className="App">
+                <Navigation/>
                 Message from server: {serverMessage}
-            </header>
-        </div>
+            </div>
+        </HashRouter>
     );
 }
 
