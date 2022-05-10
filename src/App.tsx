@@ -1,26 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [serverMessage, setServerMessage] = React.useState('');
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_FETCH_CALL_DOMAIN}/hello-world`, {
+            method: 'GET',
+        }).then(response => response.text())
+            .then(data => {
+                setServerMessage(data.toString());
+            });
+    });
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo"/>
+                Message from server: {serverMessage}
+            </header>
+        </div>
+    );
 }
 
 export default App;

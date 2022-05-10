@@ -1,5 +1,6 @@
 {
   "name": "chatbots-frontend",
+  "homepage": "https://bzz-2020.github.io/M133-Chatbots-Frontend/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
