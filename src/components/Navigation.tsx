@@ -7,7 +7,11 @@ interface userInfos {
 }
 
 export default function Navigation() {
-    const [user, setUser] = React.useState<userInfos>({id: -1, username: "undefined", loggedIn: false});
+    const [user, setUser] = React.useState<userInfos>({
+        id: -1,
+        username: "undefined (but not really)",
+        loggedIn: false
+    });
 
     // checks if the user is logged in
     useEffect(() => {
@@ -20,21 +24,33 @@ export default function Navigation() {
             credentials: 'include',
         })
             .then(r => {
+                return {
+                    status: r.status,
+                    response: r,
+                }
+            })
+            .then(async r => {
                 if (r.status === 200) {
-                    return {user: r.json(), loggedIn: true};
-                } else if (r.status === 201) {
-                    return {user: {
+                    let json: userInfos = await r.response.json();
+
+                    return {
+                        username: json.username,
+                        id: json.id,
+                        loggedIn: true,
+                    } as userInfos;
+                } else {
+                    return {
                         username: "undefined",
                         id: -1,
                         loggedIn: false,
-                    } as userInfos, loggedIn: false};
+                    } as userInfos;
                 }
             })
             .then(r => {
                 console.log(r);
                 setUser({
-                    id: r.user.id,
-                    username: r.user.username,
+                    id: r.id,
+                    username: r.username,
                     loggedIn: r.loggedIn,
                 });
             });
@@ -48,6 +64,13 @@ export default function Navigation() {
                     <li>
                         <p>da chunt no en Link ane</p>
                     </li>
+                    {!user.loggedIn ? (
+                        <li>
+                            <a href={`${process.env.REACT_APP_FETCH_CALL_DOMAIN}/auth/login`}>Login</a>
+                        </li>
+                    ) : (
+                        <></>
+                    )}
                 </ul>
             </nav>
             <div className={"user-info"}>
