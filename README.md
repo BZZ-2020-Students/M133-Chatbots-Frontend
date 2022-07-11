@@ -1,4 +1,4 @@
-This project needs some environment variables to be set. If you're working locally, create a ".env" file in the root
+This project needs some environment variables to be set. If you're working locally, create a ".env.local" file in the root
 directory with the following variables: If you're deploying to GitHub pages, create secrets for the following variables
 in your GitHub repository:
 
