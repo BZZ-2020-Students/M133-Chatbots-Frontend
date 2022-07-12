@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Chatbot</title>
+    <script src="../js/libs/jquery-3.6.0.min.js"></script>
     <script src="../js/util.js"></script>
     <script src="../js/chatbot.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 <h1 id="title"></h1>
 <h2>Made by <span id="madeBy"></span></h2>
-<div id="chatContainer">
-    <div id="chat"></div>
+<main>
+    <div id="chatContainer">
+        <div id="chatOutPut"></div>
+    </div>
     <div id="chatInput">
-        <label for="chatInputText"></label><input id="chatInputText" type="text" placeholder="Type a message..."/>
+        <label for="chatInputText"></label><input id="chatInputText" autofocus type="text" placeholder="Type a message..."/>
         <button id="chatInputSend">Send</button>
     </div>
-</div>
+</main>
 </body>
 </html>

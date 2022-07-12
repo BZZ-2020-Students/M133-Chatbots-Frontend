@@ -1,0 +1,26 @@
+body main #chatContainer {
+    height: 65vh;
+    overflow: auto;
+    /* As soon as needed, show a scrollbar */
+    overflow-x: hidden;
+    border: 1px solid;
+    margin-top: 10px;
+}
+
+body main #chatContainer #chatOutPut #firstMessageContainer {
+    float: left;
+}
+
+body main #chatContainer #chatOutPut .message-container {
+    border: 1px solid;
+    /* NOTE: add a small and thin border */
+    padding: 10px;
+    min-height: 50px;
+    vertical-align: middle;
+}
+
+body main #chatContainer #chatOutPut .message-container.user {
+    text-align: right;
+    background-color: #A36650;
+    color: #ffffff;
+}

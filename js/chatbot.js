@@ -1,10 +1,17 @@
 let chatbot = null;
+let chatInput;
+let chatOutput;
+let chatContainer;
+
 document.addEventListener("DOMContentLoaded", () => {
     const fullSearchParams = window.location.search;
     const urlParams = new URLSearchParams(fullSearchParams);
     const chatbotId = urlParams.get("chatbotId");
     const title = document.getElementById("title");
     const madeBy = document.getElementById("madeBy");
+    chatInput = document.getElementById("chatInputText");
+    chatOutput = document.getElementById("chatOutPut");
+    chatContainer = document.getElementById("chatContainer");
 
     fetch("".concat(baseUrl, "/chatbot/", chatbotId))
         .then(response => {
@@ -32,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function sendMessage() {
-    const chatInput = document.getElementById("chatInputText");
     const chatInputValue = chatInput.value;
 
     if (chatInputValue.length > 0) {
@@ -41,8 +47,23 @@ async function sendMessage() {
         });
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
             chatInput.value = "";
+
+            chatOutput.innerHTML +=
+                `<div class="message-container user">
+                    <span class="message-text user">
+                        ${chatInputValue}
+                    </span>
+                </div>`;
+
+            chatOutput.innerHTML +=
+                `<div class="message-container chatbot">
+                    <span class="message-text chatbot">
+                        ${data.text}
+                    </span>
+                </div>`;
+
+            chatContainer.scrollTop = chatContainer.scrollHeight;
         } else {
             throw new Error("Failed to send message");
         }
