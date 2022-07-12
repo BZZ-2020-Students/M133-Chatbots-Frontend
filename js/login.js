@@ -13,6 +13,7 @@ function login(event) {
         body: data
     }).then(function (response) {
         if (response.ok) {
+            console.log(response)
             return response.json();
         } else {
             throw new Error("Login failed");
