@@ -9,14 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 throw new Error("Failed to get chatbots");
             }
         }).then(data => {
-        console.log(data);
         data.forEach(chatbot => {
                 let chatbotElement = document.createElement("div");
+                const chatbotId = chatbot.id;
                 chatbotElement.className = "chatbot";
                 chatbotElement.innerHTML = `
                     <h2>${chatbot.chatbotName}</h2>
                     <p>${chatbot.user.username}</p>
-                    <a href="${baseUrl}/chatbot/${chatbot.id}/chat">Chat</a>
+                    <button onclick="loadChatbot('${chatbotId}')">Start chatting</button>
                 `;
                 chatbotCollection.appendChild(chatbotElement);
             }
@@ -25,3 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
         alert(error.message);
     });
 });
+
+function loadChatbot(chatbotId) {
+    const url = new URL((window.location.href.replace("index.html", "")).concat("pages/chatbot.html"));
+    url.searchParams.set("chatbotId", chatbotId);
+    url.searchParams
+    window.location.href = url.href;
+}
